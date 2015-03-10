@@ -1,0 +1,10 @@
+  vim: ft=markdown
+# 安装软件
+
+    sudo apt-get install vim-gnome  #  vim-ruby  
+    sudo apt-get install ctags    # for vim
+    # 输入法
+    sudo apt-get install fcitx fcitx-config-gtk fcitx-sunpinyin fcitx-table-all
+    # ruby
+    rvm install ruby-2.1.2
+

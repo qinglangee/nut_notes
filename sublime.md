@@ -1,0 +1,57 @@
+  vim: ft=markdown
+
+# sublime
+## 中文输入法问题
+
+http://www.pobeta.com/ubuntu-sublime.html
+
+http://www.sublimetext.com/forum/viewtopic.php?f=3&t=7006&start=10#p41343
+## 安装插件
+安装Sublime text 2插件很方便，可以直接下载安装包解压缩到Packages目录（菜单->preferences->packages）
+Linux的目录在~/.config/sublime-text-2/Packages
+Windows : sublimm3安装目录（sublime3）\Data\Packages\
+
+用 Pachage Control 安装
+ZHCHTODO
+
+[Robot Framework Assistant](https://sublime.wbond.net/packages/Robot%20Framework%20Assistant)
+## 文件后缀设置
+
+    先打开一个markdown文件, 在view->syntax中设定语法为markdown, 然后打开 Preferences -> Settings-More -> Syntax Specific-User 会打开一个 Markdown.sublime-settings 文件 , 在文件中加入下面一行, 就会把这些后缀的文件解析为markdown文件
+
+    {"extensions":["mkd", "md"]}
+
+## 快捷键
+
+### 自定义快捷键
+
+    Preferrences -> Key Bindings-User
+    [
+        { "keys": ["ctrl+d"], "command": "run_macro_file", "args": {"file": "Packages/Default/Delete Line.sublime-macro"} },
+        { "keys": ["ctrl+shift+k"], "command": "find_under_expand" },
+        { "keys": ["alt+up"], "command": "swap_line_up" },
+        { "keys": ["alt+down"], "command": "swap_line_down" },
+        { "keys": ["ctrl+down"], "command": "duplicate_line" }
+    ]
+
+
+### 常用快捷键
+
+    Ctrl+KK  从光标处删除至行尾
+    Ctrl+KU  改为大写
+    Ctrl+KL  改为小写
+    Ctrl+M  光标移动至括号内开始或结束的位置
+    Ctrl+Shift+M  选择括号内的内容(按住-继续选择父括号)
+    Alt+.  闭合当前标签
+    右键+shift  列选择
+    Ctrl+P   直接搜文件
+          @ 搜函数, markdown中搜标题
+          : 跳到行数 (Ctrl + G)
+          # 在当前文件中搜索
+    C+S+[ 折叠代码
+    C+S+] 展开代码
+    C+k0  展开所有
+    C+k 1 2 3 4 按层级折叠所有
+
+    其它
+    http://blog.sina.com.cn/s/blog_7d34486c0100vu20.html
