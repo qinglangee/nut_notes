@@ -1,0 +1,22 @@
+# brackets 使用
+
+快捷键设置  [教程][1]  
+Debug->Open user key map
+
+    {
+        "documentation": "https://github.com/adobe/brackets/wiki/User-Key-Bindings",
+        "overrides": {
+            "Ctrl-Down":"edit.duplicate",
+            "Ctrl-/":"edit.lineComment",
+            "Shift-Enter":"edit.openLineBelow",
+            "Ctrl-D":"edit.deletelines",
+            "Alt-Up":"edit.lineUp",
+            "Alt-Down":"edit.lineDown"
+        }
+    }
+
+
+
+
+refs:  
+[1]: https://github.com/adobe/brackets/wiki/User-Key-Bindings  
