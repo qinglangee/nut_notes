@@ -4,6 +4,11 @@ nutsstore有历史版本, ok了
 
 ## vim  十六进制编辑 :%!xxd 
 
+## 到上一次编辑的地方
+
+    ctrl + o
+    ctrl + i   取消ctrl+o的操作
+
 ## 大小写转换
 单词转换为大写   gUw  单词转换为小写  guw
 

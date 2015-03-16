@@ -31,10 +31,13 @@ mvn -o   参数o, offline模式, 不下载更新文件
     2、运行mvn；
          这个主要是为了能够在%user_profile%/目录下创建.m目录。这个目录是maven的默认工作目录。
     3、创建一个基本的eclipse项目；
+
          mvn archetype:create -DgroupId=org.powersoft -DartifactId=app
          mvn eclipse:eclipse
     4、创建一个webapp；
+
          mvn archetype:create -DgroupId=org.powersoft -DartifactId=hrms -DarchetypeArtifactId=maven-archetype-webapp
+      产生的默认web目录是  *webapp*
     5、将生成的src/main下的webapp目录拷贝到在第3步中创建的eclipse项目中的src/main目录下；
          这个将作为web的根目录
     6、将以上创建的项目导入到eclisep工程中；
