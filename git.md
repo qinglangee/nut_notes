@@ -21,6 +21,7 @@
 指定.git目录位置 
 
     git --git-dir=dirname status
+*可以把．git作为一个普通ascii文件，　文件内容是  gitdir: <path>, i.e. the path to the real git repository).*
 
 查看所有配置   
 
