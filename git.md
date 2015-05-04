@@ -18,10 +18,11 @@
 
 
 # git常用命令
-指定.git目录位置 
+指定.git目录位置 , [文档][3]
 
     git --git-dir=dirname status
-*可以把．git作为一个普通ascii文件，　文件内容是  gitdir: <path>, i.e. the path to the real git repository).*
+>可以把．git作为一个普通ascii文件，　文件内容是  gitdir: <path>, i.e. the path to the real git repository).
+ 冒号后面一定要有空格
 
 查看所有配置   
 
@@ -102,6 +103,9 @@ bin
 回退一次提交  (revert 只回退指定提交的修改, 如果有三次需要回退要回退三次, 不能直接回退前面第三次)
 
     git revert 78dyh6e
+git 交互式操作
+
+    git add -i
 
 ## diff 相关的
 比较文件不同
@@ -364,5 +368,6 @@ git私服搭建  http://fallenlord.blogbus.com/logs/71173948.html   http://falle
 小组级git服务器搭建  http://blog.prosight.me/index.php/2009/11/485
 
  
-[1]:http://www.cnblogs.com/analyzer/articles/1736729.html
-[2]:https://github.com/nirvdrum/svn2git
+[1]: http://www.cnblogs.com/analyzer/articles/1736729.html
+[2]: https://github.com/nirvdrum/svn2git
+[3]: https://www.kernel.org/pub/software/scm/git/docs/gitrepository-layout.html

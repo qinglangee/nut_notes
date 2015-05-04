@@ -5,6 +5,12 @@
     adb install ebook.apk
     adb uninstall net.blogjava.mobile.ebook  // 卸载要用包名
     adb install -r ebook.apk
+显示连接的设备
+
+    adb devices
+服务重启
+
+    adb kill-server， adb start-server
 
 
 # tips

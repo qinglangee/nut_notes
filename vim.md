@@ -110,6 +110,32 @@ CTRL-W-K 将窗口移到顶端
 *3.怎样查找插件名字* 
 在vim-addon-manager-known-repositories/db目录里, 几个文件里都有.
 
+##  配置状态栏
+
+配置：
+
+    set laststatus=2 “长久显示：1
+    set statusline=%t\ %y\ format:\ %{&ff};\ [%c,%l]
+
+自己定做:
+
+set statusline 定制格式
+
+
+状态栏的定制类似C语言特性，常见的定制格式：
+
+    c ~>列号
+    l ~>行号
+    r ~>只读标记
+    t ~>文件名
+    y ~>文件内容类型
+    \&ff ~> 文件格式 unix\mac\dos
+文件格式之前需要添加%完成转义，空格，竖线等特殊字符需要使用斜杠\完成转义。
+
+例如:
+
+    set statusline=%t\ %y\ format:\ %{&ff};\ [%c,%l] 
+
 ## windows下配置文件位置
 
 

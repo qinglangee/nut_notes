@@ -9,6 +9,21 @@
 
     Help -> Install New Software, 选择版本号对应的站点,  General Purpose Tools → Marketplace Client
 
+## eclipse version
+eclipse Indigo Service Release 2    platform 3.7.2
+eclipse Android Developer Tools     platform 4.2.1
+eclipse Android is Juno             platform 4.2.1
+eclipse Kepler Service Release 2    platform 4.3.2
+eclipse Luna Release (4.4.0)        platform 4.4.0
+
+indigo 之前主要用的
+kepler 现在主要用的
+luna   学习java8用的
+
+## 查看错误日志 
+
+    Help -> About Eclipse -> Installation Details -> Configuration -> View Error Log(在最下面)
+
 
 ## 你不知道的
 [你不知道的Eclipse用法:使用Metrics 测量复杂度 ][1]  

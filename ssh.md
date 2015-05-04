@@ -14,9 +14,14 @@ ubuntu 默认没有sshd服务
 ## 免密码登录
 进入客户机的~/.ssh/目录, 把 id_rsa.pub的内容cp到服务器的用户目录的.ssh/authorized_keys 文件中
 命令实现
-ssh-copy-id root@192.168.1.121
+
+    ssh-copy-id root@192.168.1.121
 指定文件
-ssh-copy-id -i id_rsa_l99.pub root@192.168.1.121
+
+    ssh-copy-id -i id_rsa_l99.pub root@192.168.1.121
+指定不使用授权文件登录, 如果在没有授权的机器上, 会尝试失败很多次, 然后被断掉
+
+    ssh -o PubkeyAuthentication=no chengz@192.168.2.253
 
 ssh-add
 ## ssh定时断开
