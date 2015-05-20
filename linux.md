@@ -130,6 +130,22 @@ ubuntu 的没有这个工具, 用update-rc.d
 
     cat /dev/urandom | md5sum
 # 命令简介
+## 系统监控命令
+iostat
+meminfo  free
+mpstat
+netstat
+nmon
+pmap
+ps  pstree
+sar
+strace
+tcpdump
+top
+uptime
+vmstat
+wireshark
+
 ## grep
 ### 查看特定类型的文件
 

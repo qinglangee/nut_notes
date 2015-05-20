@@ -106,6 +106,10 @@ bin
 git 交互式操作
 
     git add -i
+git 合并提交
+
+    git add .
+    git commit --amend  -am "修改订阅按钮样式"    # 这次提交会和上次提交合并成一次提交 
 
 ## diff 相关的
 比较文件不同

@@ -36,6 +36,11 @@ luna   学习java8用的
 1. 有可能是tomcat_base中文件与eclipse中server config的不一致,删掉tomcat_base中的文件.
 2. 双击Servers面板中的server 名字, 打开配置界面, 在Host name:一栏中, 如果hose name与server.xml 或 context.xml中指定的<host>的name属性不一致,会报这个错误
 
+## HttpServlet cannot be resolved to a type 
+eclipse 没加javaEE的lib, 把这几个文件作为一个lib, 加进去
+
+    javaee.jar  jsf-api.jar  jsf-impl.jar  jstl-1.2.jar
+
 
 [1]: http://blog.csdn.net/p106786860/article/details/9230267
 [2]: http://blog.csdn.net/p106786860/article/details/9193661
