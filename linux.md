@@ -452,7 +452,13 @@ fuser -km /nfsdata
     如果你知道怎么用sort/uniq来做集合交集、并集、差集能很大地促进你的工作效率。假设有两个文本文件a和b已解被 uniq了，那么，用sort/uniq会是最快的方式，无论这两个文件有多大（sort不会被内存所限，你甚至可以使用-T选项，如果你的/tmp目录很小）
 
 ## xargs
-删除aa目录中与bb目录同名的文件  ls bb |xargs -i rm ~/temp/d3/aa/{}
+删除aa目录中与bb目录同名的文件  
+
+    ls bb |xargs -i rm ~/temp/d3/aa/{}
+删除find 找到的文件
+
+    find aa | xargs rm
+
 目录中文件重命名,加上.bak( -t 表示先打印出命令)    ls |xargs -t -i mv {} {}.bak
 ## scp
 scp 远端的时候，你可以按tab键来查看远端的目录和文件

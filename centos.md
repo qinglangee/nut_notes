@@ -3,6 +3,9 @@
 # 安装
 ## 安装locate
     yum install mlocate
+## 查看可用的安装包
+
+    yum search java | grep -i --color JDK
 ## rpm安装命令
 
     rpm -ivh xxx.rpm       # 安装rpm文件

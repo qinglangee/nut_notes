@@ -174,9 +174,13 @@ git log 有许多选项可以帮助你搜寻感兴趣的提交，接下来我们
 git 打包
 
     git archive master | tar -x -C /somewhere/else
-    git archive master | bzip2 >source-tree.tar.bz2
+    好像不太对           git archive master | bzip2 >source-tree.tar.bz2
     ZIP archive:
     git archive --format zip --output /full/path/to/zipfile.zip master 
+
+    today=`date +'%G-%m-%d'`
+    git archive --format zip --output /home/lifeix/Nutstore/l99/$today-pintimes.zip develop
+
 *git help archive for more details, it's quite flexible.*
 
 # git 场景处理

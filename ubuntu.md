@@ -7,4 +7,8 @@
     sudo apt-get install fcitx fcitx-config-gtk fcitx-sunpinyin fcitx-table-all
     # ruby
     rvm install ruby-2.1.2
+# 命令
 
+## 文件管理器
+
+    nautilus .

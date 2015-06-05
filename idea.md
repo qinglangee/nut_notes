@@ -1,7 +1,8 @@
   vim: ft=markdown
 
-# 操作
+# idea 操作
 
+## 常用操作
 rename
 
     shift+F6
@@ -16,4 +17,9 @@ rename
 
     A custom dictionary is a mere textual file with a .dic extension, with each word starting on a new line.
     All you have to do is to point to the directories where your dictionaries are stored, in the Spelling of the Settings dialog.
+
+## 快捷键设置
+行操作， 搜索 duplicate line  , move line  , delete line 设置 Ctrl+上/下  Alt+上/下  Ctrl+d
+
+MainMenu->Code->Completion->Basic  Alt-j
 
