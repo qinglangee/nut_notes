@@ -1,1 +1,5 @@
 gitdir: /home/zhch/document/alone_git/nut_notes
+
+指定.git目录位置 
+可以把．git作为一个普通ascii文件，　文件内容是  gitdir: <path>, 如第一行
+冒号后面一定要有空格
