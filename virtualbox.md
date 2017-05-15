@@ -15,3 +15,5 @@
     wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
     sudo apt-get update
     sudo apt-get install virtualbox-4.3
+## 设置共享文件夹
+在虚拟机->设置 界面中有共享文件夹的设置，自己设置一下就行了

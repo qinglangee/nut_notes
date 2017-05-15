@@ -1,6 +1,10 @@
    vim: ft=markdown  
 #  常用命令
 
+## 连接字符串
+
+	jdbc:mysql://localhost:3306/dbname?useUnicode=true&characterEncoding=UTF-8
+	jdbc:mysql://localhost:3306/dbname?useUnicode=true&amp;characterEncoding=UTF-8
 ## 查看引擎状态
 
 show table status from 数据库名;
@@ -10,11 +14,32 @@ SHOW CREATE TABLE example;
 
 mysql -h110.110.110.110 -uroot -pabcd123
 
+## 查看建表语句
+
+    show create table web_job_skill;
+
+
+### 查看所有数据库 / 所有表
+
+    show databases;
+    use test;
+    show tables;
+
+    -- 查看表数据
+    use information_schema;
+    select concat(round(sum(DATA_LENGTH/1024/1024), 2), 'MB') as data from TABLES;
+    -- 查看某一个表
+    select concat(round(data_length/1024/1024,2), 'MB') as data from tables where TABLE_SCHEMA='resume_import_sys' and TABLE_NAME='resume_company_info';
+### 查看所有用户
+用 root 用户登录
+
+    select distinct Grantee  from information_schema.user_privileges;
+
 ###  查看version
 select version();
 
 ### 查看连接情况
-echo "show processlist" | mysql -uskst -p'TestDBSkst$@'  | awk '{print $3}' | awk -F : '{print $1}' | sort | uniq -dc
+echo "show processlist" | mysql -uusername -p'password'  | awk '{print $3}' | awk -F : '{print $1}' | sort | uniq -dc
 TestDBSkst$@  
 查看当前连接数量
 show status like '%Threads_connected%';
@@ -96,10 +121,11 @@ mysqladmin -uroot -pab123 password abc345
 修改increment 自动增长基数
 
     使用sql语句：alter table table_name AUTO_INCREMENT=n
+数据库改名 *原来有个改名的语句来着， 后来因为危险干掉了，就不能改名了*
 
 ## 表操作
 
-## 执行sql脚本 
+### 执行sql脚本 
 
 执行sql脚本,可以有2种方法:
   第一种方法:
@@ -112,8 +138,60 @@ mysqladmin -uroot -pab123 password abc345
     source F:\hello world\niuzi.sql 
     (注意路径不用加引号的) 或者 
     \. F:\hello world\niuzi.sql (注意路径不用加引号的) 回车即可
+## 表结构修改
 
 
+建立索引
+create [unique][cluster]index <索引名> on table|view(<列名>[<次序>][,<列名>[<次序>]]...)
+CREATE INDEX mytable_categoryid ON mytable (category_id);
+CREATE UNIQUE INDEX user_collected_item ON eatables_collect (accountId, type, targetId);
+唯一索引
+CREATE UNIQUE INDEX user_collected_item ON eatables_collect (accountId, type, targetId);
+查看索引
+
+    SHOW INDEX FROM table_name [FROM db_name];
+删除索引
+
+    DROP INDEX indexname ON tablename;
+
+创建可以级联 删除/更新 的外键
+
+    CONSTRAINT  `comments_ibfk_1`  FOREIGN   KEY  (`blog_id`)  REFERENCES  `blogs` (`id`)  ON   DELETE   CASCADE
+    CONSTRAINT  `comments_ibfk_1`  FOREIGN   KEY  (`blog_id`)  REFERENCES  `blogs` (`id`)  ON   UPDATE   CASCADE
+查看所有外键
+
+    select       concat(table_name, '.', column_name) as 'foreign key',        
+    concat(referenced_table_name, '.', referenced_column_name) as 'references' 
+    from      information_schema.key_column_usage  where      table_schema='sqtzhch' and      referenced_table_name is not null;
+删除外键
+
+    alter table resume_education drop foreign key `FK_tym9fj9os2ribbikv3vwoxge`;
+
+删除外键
+
+
+    alter table 表名 drop foreign key  约束名;
+    alter table web_job_skill drop foreign key  FK_web_job_skill_web_skill;
+添加/删除/修改字段
+
+    ALTER TABLE `web_company_filters_s`
+    CHANGE COLUMN `filters` `name`  varchar(225) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `company_gid`,
+    CHANGE COLUMN `name` `filters`  text CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL AFTER `name`;  -- 修改字段
+
+    ALTER TABLE `web_profile_s`  DROP COLUMN `uid`,
+        DROP COLUMN `cell_link_source`,
+        DROP COLUMN `resume_pool`;  -- 删除字段
+
+    ALTER TABLE `web_profile_s` ADD COLUMN `group_id` VARCHAR(255) NOT NULL AFTER `source`;  -- 添加字段
+    ALTER TABLE zhch CHANGE name name2 varchar(22); -- 修改列名  CHANGE 或 CHANGE COLUMN 都可以
+
+## 表名修改
+
+    -- 跨数据库
+    RENAME TABLE db_name.table1 TO new_db_name.table1,
+                     db_name.table2 TO new_db_name.table2;
+    -- 同数据库
+    RENAME TABLE table1 TO table2;
 ## 问题解决
 
 ### root密码记,或root无法登录
@@ -144,16 +222,46 @@ shell$ mysqlhotcopy db_name /path/to/some/dir
 只导出结构, 没有数据
 
     mysqldump -d -h localhost -u root -pmypassword databasename > dumpfile.sql
-导出部分表的结构或数据
+导出部分表的结构和数据
 
-    mysqldump  -h 192.168.1.48 -u username -p'password' college_2013 --tables college_info > dumpfile.sql
+    mysqldump  -h 192.168.1.48 -u username -p（密码提示后再输入） college_2013 --tables college_info > dumpfile.sql
 导出数据
 
     c:$ mysqldump -udb_username -pdb_password myplick > sqlname.sql
+导出表的部分数据 
+
+    mysqldump -u用户名 -p密码 数据库名 表名 --where="筛选条件" > 导出文件路径
+    mysqldump -uroot -p123456 dbname tablename --where=" sensorid=11 and fieldid=0" > /home/xyx/Temp.sql
+    # max_allowed_packet
+    mysqldump -uroot -p123456 --max_allowed_packet=100M  --net_buffer_length=1M dbname tablename > /home/xyx/Temp.sql
+
+ You can also set the following variables by using --var_name=value syntax:
+
+    max_allowed_packet
+
+    The maximum size of the buffer for client/server communication. The default is 24MB, the maximum is 1GB.
+
+    net_buffer_length
+
+    The initial size of the buffer for client/server communication. When creating multiple-row INSERT statements (as with the --extended-insert or --opt option), mysqldump creates rows up to net_buffer_length bytes long. If you increase this variable, ensure that the MySQL server net_buffer_length system variable has a value at least this large. 
+
+导出数据到文件
+
+    mysql -h127.0.0.1 -uroot -p000000 -e"select * from a" test > 1.txt 
+    host ip     user   password   query statement  database  filename 
+这样会输出列名信息，如果不想输出列名信息： 
+ 
+    mysql -h127.0.0.1 -uroot -p000000 -N -e"select * from a" test > 1.txt 
+
 数据恢复
 
     c:$ mysql < database.sql -uusername -ppassword -Ddatabase
+查询数据写入文件
 
+    select * from user into outfile '/tmp/user.txt';
+
+
+    select * from user into outfile '/tmp/user.txt' FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n'； 
 ### The MySQL Server returned this Error:MySQL Error Nr. MySQL server has gone away。
 
 解决的方法就是找到mysql安装目录，找到my.ini文件，在文件的最后添加： max_allowed_packet = 32M(也可以设置自己需要的大小)。 max_allowed_packet 参数的作用是，用来控制其通信缓冲区的最大长度。
@@ -163,19 +271,6 @@ shell$ mysqlhotcopy db_name /path/to/some/dir
     update message_sequence set createtime = date_add(createtime,interval -3 day);
 
 组合结果行　: select GROUP_CONCAT(CONVERT(accountId, CHAR)) from account where l99no in (3082423,3098391,3090830
-
-建立索引
-create [unique][cluster]index <索引名> on table|view(<列名>[<次序>][,<列名>[<次序>]]...)
-CREATE INDEX mytable_categoryid ON mytable (category_id);
-CREATE UNIQUE INDEX user_collected_item ON eatables_collect (accountId, type, targetId);
-唯一索引
-CREATE UNIQUE INDEX user_collected_item ON eatables_collect (accountId, type, targetId);
-查看索引
-
-    SHOW INDEX FROM table_name [FROM db_name];
-删除索引
-
-    DROP INDEX indexname ON tablename;
 
 
 导入数据的方法:
@@ -208,9 +303,20 @@ MySQL导出的SQL语句在导入时有可能会非常非常慢，经历过导入
     mysql>mysqldump -uroot -p 数据库名  -e --max_allowed_packet=1048576 --net_buffer_length=16384 > SQL文件 
 
 
-# 语法
+# 语法 and 函数 
 
 ## 字符串
 连接
 
     update tablename set name=CONCAT('abc',  name, 'def') WHERE age=12;
+替换
+
+    update pintimes.wp_posts set post_content=replace(post_content,'imgs.pintimes.com','imgs.lifeixdesign.us') where id = 177887;
+## 更新
+用表的内容更新自己
+
+    update pintimes.wp_posts set post_content=replace(post_content,'imgs.pintimes.com','imgs.lifeixdesign.us') where id = 177887;
+## 查询插入
+相当于 Oracle 的 select into 语句
+    
+    insert into tmp_score_job (company_gid) select c.company_gid from tmp_score_company c;

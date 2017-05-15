@@ -11,3 +11,7 @@
         console.log(123)
     }
 
+类型判断, 详情见 wordpress  `js_type_of.md`
+
+	typeof(aa) == 'function'
+	typeof(bb) == 'string'

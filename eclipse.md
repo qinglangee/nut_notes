@@ -2,12 +2,9 @@
 # 设置
 设置maven java.home
 
-设置refresh workspace
-
-    windows -> Preferences -> General, 关掉refresh选项
-安装EclipseMarket
-
-    Help -> Install New Software, 选择版本号对应的站点,  General Purpose Tools → Marketplace Client
+设置refresh workspace  `windows -> Preferences -> General, 关掉refresh选项`
+安装EclipseMarket `Help -> Install New Software, 选择版本号对应的站点,  General Purpose Tools → Marketplace Client`
+关闭拼写检查　`window - Preferences - General - Editors - Text Editors - Spelling - Enable spell checking `
 
 ## eclipse version
 eclipse Indigo Service Release 2    platform 3.7.2
@@ -15,12 +12,13 @@ eclipse Android Developer Tools     platform 4.2.1
 eclipse Android is Juno             platform 4.2.1
 eclipse Kepler Service Release 2    platform 4.3.2
 eclipse Luna Release (4.4.0)        platform 4.4.0
+eclipse Neon                        platform 4.6.3
 
 indigo 之前主要用的
 kepler 现在主要用的
 luna   学习java8用的
 
-## 查看错误日志 
+## 查看错误日志
 
     Help -> About Eclipse -> Installation Details -> Configuration -> View Error Log(在最下面)
 
@@ -36,7 +34,7 @@ luna   学习java8用的
 1. 有可能是tomcat_base中文件与eclipse中server config的不一致,删掉tomcat_base中的文件.
 2. 双击Servers面板中的server 名字, 打开配置界面, 在Host name:一栏中, 如果hose name与server.xml 或 context.xml中指定的<host>的name属性不一致,会报这个错误
 
-## HttpServlet cannot be resolved to a type 
+## HttpServlet cannot be resolved to a type
 eclipse 没加javaEE的lib, 把这几个文件作为一个lib, 加进去
 
     javaee.jar  jsf-api.jar  jsf-impl.jar  jstl-1.2.jar

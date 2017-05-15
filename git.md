@@ -1,18 +1,20 @@
   vim: ft=markdown
 # 资料
+[Pro git](http://git-scm.com/book/en/v2)  
+
 国内的git仓库  gitcd.com   
 
-    $ mkdir ~/Hello-World 
-    $ cd ~/Hello-World 
-    $ git init 
+    $ mkdir ~/Hello-World
+    $ cd ~/Hello-World
+    $ git init
     $ touch README
 
-    
-    $ git add README 
+
+    $ git add README
     $ git commit -m 'first commit'
 
-    
-    $ git remote add origin git@github.com:username/Hello-World.git 
+
+    $ git remote add origin git@github.com:username/Hello-World.git
     $ git push origin master
     $ git push -u origin master
 
@@ -27,6 +29,9 @@
 查看所有配置   
 
     git  config  -l(--list)
+全局配置保存位置
+
+    vim ~/.gitconfig
 删除配置项
 
     git config --unset --global user.name
@@ -36,14 +41,33 @@
 
     # 设置本地 master 与 origin/<branch> 同步
     git branch --set-upstream-to=origin/<branch> master
+添加删除远程仓库
 
-常用配置 
+    git remote add [-t <branch>] [-m <master>] [-f] [--[no-]tags] [--mirror=<fetch|push>] <name> <url>
+    git remote rename <old> <new>
+    git remote remove <name>
+常用配置
 
     git config --global user.name "zhch"
     git config --global user.email "zhch@163.com"
     git config --global push.default simple
 
     git config --global color.ui "auto"
+
+    # windows 中别名用空格不用等号(好像是新版的都不用等号了)
+
+    git config --global alias.s status
+    git config --global alias.c commit
+    git config --global alias.a add
+    git config --global alias.ck checkout
+    git config --global alias.b branch
+    git config --global alias.log1 "log --pretty=oneline"
+    git config --global alias.d diff
+    git config --global alias.ss "status -s"
+    git config --global alias.l log
+
+
+    # 原来linux下别名中间用等号的，现在也不用了
     git config --global alias.s=status
     git config --global alias.c=commit
     git config --global alias.a=add
@@ -54,7 +78,26 @@
     git config --global alias.ss="status -s"
     git config --global alias.l=log
 
-忽略文件 
+也可以直接编辑 .gitconfig 文件中直接添加， windows 下 在 `C:\Users\[user]` 中
+
+    [user]
+        email = zhchqingdao@163.com
+        name = zhangcheng
+    [alias]
+        ck = checkout
+        s = status
+        c = commit
+        a = add
+        b = branch
+        log1 = log --pretty=oneline
+        d = diff
+        ss = status -s
+        l = log
+        ignored = !git ls-files -v | grep "^[[:lower:]]"
+    [color]
+        ui = auto
+
+忽略文件
 
     .gitignore
 
@@ -79,7 +122,16 @@ bin
 假装文件没有修改
 
     git update-index --assume-unchanged filename
+    git update-index --no-assume-unchanged config.xml  #恢复假装的文件
+
+    git ls-files -v　　＃忘了哪个假装了，可以这样查看，　假装的前面是小写h
+
 ## branch 相关的
+新建/删除分支
+
+    git branch aa  # 新建分支 aa
+    git branch -d aa  ## 删除分支 aa
+    git branch -D aa  # 强制删除分支 aa, 没有merge也删除
 查看远程分支
 
     git branch -a
@@ -97,7 +149,7 @@ bin
 
 把一个文件换回最新commit
 
-    git checkout filename 
+    git checkout filename
     git checkout -- filename    # 如果刚好有个分支与文件同名, 用这个命令
 
 回退一次提交  (revert 只回退指定提交的修改, 如果有三次需要回退要回退三次, 不能直接回退前面第三次)
@@ -109,7 +161,7 @@ git 交互式操作
 git 合并提交
 
     git add .
-    git commit --amend  -am "修改订阅按钮样式"    # 这次提交会和上次提交合并成一次提交 
+    git commit --amend  -am "修改订阅按钮样式"    # 这次提交会和上次提交合并成一次提交
 
 ## diff 相关的
 比较文件不同
@@ -118,10 +170,14 @@ git 合并提交
     git diff f58c2b52a4b..ad1585dbd85
     git diff master..develop filename
     git diff master..develop -- filename
-只查看修改了哪些文件 
+只查看修改了哪些文件
 
     git diff --name-only feadf08ff..279a3f6d3
     git diff --name-status feadf08ff..279a3f6d3
+查看某版本与自己上一个版本号的差别
+
+    git diff feadf08ff^..feadf08ff      # 上一个版本号
+    git diff feadf08ff^^..feadf08ff      # 上两个版本号
 查看文件历史
 
     # 只查看一个文件的历史
@@ -142,7 +198,8 @@ git 合并提交
 gitignore分层
 * .gitignore           放项目公用,大家都用的
 * .git/info/exclude    放本地, 只自己一个copy用的
-* $HOME/.config/git/ignore  放所有项目里都忽略的
+* $HOME/.config/git/ignore  放所有项目里都忽略的，全局忽略
+    比如，在这个文件中添加一行　`zhignore/`, 那么各级目录中的　zhignore 目录都会被忽略
 
 ## tag  相关的
 创建一个tag
@@ -171,12 +228,14 @@ git log 有许多选项可以帮助你搜寻感兴趣的提交，接下来我们
 只全并一个commit的内容
 
     git cherry-pick  kdfu89jkl
+git 导出，不打包 *git 没有export命令， 所以它的导出就是打包，然后解开包就行了*
+
+    git archive master | tar -x -C /somewhere/else   # 这个是直接导出到别的目录
 git 打包
 
-    git archive master | tar -x -C /somewhere/else
-    好像不太对           git archive master | bzip2 >source-tree.tar.bz2
+    git archive master | bzip2 >source-tree.tar.bz2
     ZIP archive:
-    git archive --format zip --output /full/path/to/zipfile.zip master 
+    git archive --format zip --output /full/path/to/zipfile.zip master
 
     today=`date +'%G-%m-%d'`
     git archive --format zip --output /home/lifeix/Nutstore/l99/$today-pintimes.zip develop
@@ -226,7 +285,7 @@ git入门
 
 版本 1.7.4 preview
 
- 
+
 
 1. 下载,安装好(或解压好). cmd目录加入 path路径中
 
@@ -255,7 +314,7 @@ git入门
 
     $git commit -a   参数a可以自动add所有修改过的文件,不需要add那一步,但是-a只处理修改的,不处理新添加的文件.
 
-    $git commit -m 参数m后面跟 commit message信息 , 一起提交. 参数后面的信息有空格时要加引号! 
+    $git commit -m 参数m后面跟 commit message信息 , 一起提交. 参数后面的信息有空格时要加引号!
 
 4. 比较改变
 
@@ -307,7 +366,7 @@ git入门
 
     alice$gitk HEAD...FETCH_HEAD         三个点表示查看所有人(还是自己,搞不太清)从HEAD开始做了什么改变
 
-     
+
 
     alice$git remote add bob /home/bob/myrepo      添加一个远程别名
 
@@ -340,23 +399,23 @@ gittutorial-2(7) Manual Page
 
 这一节介绍 the object database and the index file
 
-git 对象数据库 
+git 对象数据库
 
- 
 
- 
 
- 
 
- 
 
- 
+
+
+
+
+
 # git 帮助
  查看帮助    查看 log 命令的帮助
 
     $git help log
 
- 
+
 
 参考:
 
@@ -375,7 +434,7 @@ git私服搭建  http://fallenlord.blogbus.com/logs/71173948.html   http://falle
 
 小组级git服务器搭建  http://blog.prosight.me/index.php/2009/11/485
 
- 
+
 [1]: http://www.cnblogs.com/analyzer/articles/1736729.html
 [2]: https://github.com/nirvdrum/svn2git
 [3]: https://www.kernel.org/pub/software/scm/git/docs/gitrepository-layout.html

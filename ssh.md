@@ -8,11 +8,12 @@ ubuntu 默认没有sshd服务
 
 ## 产生钥密钥,敲入命令按提示输入
 
+    # -t 是 type, 不输入默认就是 rsa
     ssh-keygen -t rsa
     ssh-keygen -t rsa -C "myname@163.com"  # -C 是comment, 添加注释
 
 ## 免密码登录
-进入客户机的~/.ssh/目录, 把 id_rsa.pub的内容cp到服务器的用户目录的.ssh/authorized_keys 文件中
+进入客户机的`~/.ssh/`目录, 把 `id_rsa.pub`的内容cp到服务器的用户目录的`.ssh/authorized_keys` 文件中
 命令实现
 
     ssh-copy-id root@192.168.1.121
@@ -20,11 +21,18 @@ ubuntu 默认没有sshd服务
 
     ssh-copy-id -i id_rsa_l99.pub root@192.168.1.121
 指定不使用授权文件登录, 如果在没有授权的机器上, 会尝试失败很多次, 然后被断掉
+>Too many authentication failures for chengz
 
     ssh -o PubkeyAuthentication=no chengz@192.168.2.253
 
 ssh-add
 ## ssh定时断开
+可以在你本地的机器上 Linux：/etc/ssh/ssh_config 或 Mac： ~/.ssh/config 设置， ：
+
+    Host *
+    ServerAliveInterval 120
+也可以在服务端设置，
+在/etc/ssh/sshd_config中增加ClientAliveInterval 60, ClientAliveInterval指定了服务器端向客户端请求消息的时间间隔, 默认是0, 不发送.而ClientAliveInterval 60表示每分钟发送一次, 然后客户端响应, 这样就保持长连接了
 
 ## 测试 public key 在 github 上被哪个帐号用过了
 
@@ -55,6 +63,11 @@ UseDNS no
 
 ## ssh执行命令
 
+    ssh  user@192.168.0.22  "touch /tmp/aa && touch /tmp/bb"
+## ssh proxy
+
+    ssh -qTfnN -D 7070  sshproxy@106.185.27.168
+
 ## putty  tunnel设置
 
 	切换到Connection -> SSH -> Tunnels ，设定Source port: 7575（端口号随你喜欢）; Destination: 空白, Dynamic，设定完记得按Add。
@@ -62,46 +75,6 @@ UseDNS no
 plink    proxy.bat
 
 	PLINK.EXE -C -N -D 127.0.0.1:7070 sshproxy@106.185.27.168
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -138,16 +111,16 @@ debug1: Next authentication method: publickey
 禁用 GSSAPIAuthentication 前后建立 ssh 连接时间的对比:
 
 view plaincopy to clipboardprint?
-root@server:~$ time ssh root@192.168.10.1 exit 
+root@server:~$ time ssh root@192.168.10.1 exit
 
 real 0m18.488s
 user 0m0.004s
 sys 0m0.008s
-root@server:~$ time ssh root@192.168.10.1 exit 
+root@server:~$ time ssh root@192.168.10.1 exit
 
 real 0m3.531s
 user 0m0.016s
-sys 0m0.000s 
+sys 0m0.000s
 
 
 [1]: http://www.osedu.net/article/linux/2012-05-02/405.html

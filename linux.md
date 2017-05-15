@@ -35,6 +35,14 @@ too many open files
 步骤1 是通过修改 /etc/sysctl.conf， 运行时修改内核参数，解除内核对进程打开文件数的限制
 步骤2 是通过修改 Linux PAM，对当前会话，改变打开文件数的限制
 
+## [查看 fs.inotify.max_user_watches][2]
+`cat /proc/sys/fs/inotify/max_user_watches`
+*修改*
+echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
+
+## 查看文件时间
+
+    stat aaa.txt
 ## 查看所有线程数
 1、top -H
 手册中说：-H : Threads toggle
@@ -58,9 +66,6 @@ too many open files
     # pstree -p `ps -e | grep server | awk '{print $1}'`
     # pstree -p `ps -e | grep server | awk '{print $1}'` | wc -l
 
-## 查看主机信息
-dig domain
-dig -x host
 
 ## 查看内核信息
 cat /proc/version
@@ -116,19 +121,54 @@ ubuntu 的没有这个工具, 用update-rc.d
 
     fuser filename
     fuser -mv  filename
+## 查看进程运行了多长时间
+
+    ps -eo pid,tty,user,comm,stime,etime | grep python   # 查看一些python进程运行了多长时间
+## 网络相关
+## 查看主机信息
+dig domain
+dig -x host
 ## 查看端口占用的pid
 
     lsof -n -P -i :80 
+## 查看网关gateway
+
+    1、route -n  
+    2、ip route show
+    3、traceroute www.baidu.com -s 100 【第一行就是自己的网关】
+    4、netstat -r
+    5、more /etc/network/interfaces 【Debian/Ubuntu Linux】
+    6、more /etc/sysconfig/network-scripts/ifcfg-eth0 【Red Hat Linux】
+## 查看默认 DNS
+
+    cat /etc/resolv.conf
+    
 # 设置xxx
 
 ## 设置history数量
 
     HISTSIZE=10000
     HISTFILESIZE=20000
+## 设置链接库路径
 
+    vim /etc/profile
+在export PATH USER LOGNAME MAIL HOSTNAME HISTSIZE INPUTRC下面加入
+
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${你的so目录}
 ## 人为提高cpu占用
 
     cat /dev/urandom | md5sum
+## 设置 tty 显示服务器IP
+所以把IP显示到标题上，就方便了很多了。在网上找到这种方法，不错，不错，呵呵。记录一下，方便以后使用。
+
+把下面的几行脚本追加到 ~/.bashrc(对应 root 用户，也就是 /root/.bashrc 文件)自动脚本的最后。
+
+    # Auto add env parameter $PROMPT_COMMAND when use non-Linux tty login by ssh.
+    if [ "$SSH_CONNECTION" != '' -a "$TERM" != 'linux' ]; then
+        declare -a HOSTIP
+        HOSTIP=`echo $SSH_CONNECTION |awk '{print $3}'`
+        export PROMPT_COMMAND='echo -ne "\033]0;${USER}@$HOSTIP:[${HOSTNAME%%.*}]:${PWD/#$HOME/~} \007"'
+    fi
 # 命令简介
 ## 系统监控命令
 iostat
@@ -145,15 +185,6 @@ top
 uptime
 vmstat
 wireshark
-
-## grep
-### 查看特定类型的文件
-
-    grep -R --include="*.cpp" aaabbb  ./src
-
-同样的功能, 用find的exec参数
-
-    find -name '*.xml' -exec grep b  {} \; -print
 
 ## locate
 显示语言的设置
@@ -267,6 +298,11 @@ uid=500(soloner) gid=501(soloner) groups=501(soloner) context=root:system_r:unco
 
 OK ，这个时候，注销，即可以 soloner 用户登录了。
 
+## 指定用户执行命令
+指定用户 lucy 执行 ls 命令
+
+    su - lucy -c "ls"
+
 # X设置
 
 ## 禁用新式的滚动条overlayscroolbars
@@ -294,31 +330,32 @@ set 命令显示所有本地定义的Shell变量
 
 
 ## 解压，压缩
-```
-$ zip -r archive-name.zip directory-to-compress
-$ unzip archive-name.zip
 
-$ gzip -d abc.gz
+    ```
+    $ zip -r archive-name.zip directory-to-compress
+    $ unzip archive-name.zip
 
-$ tar -zcvf archive-name.tar.gz directory-to-compress
-$ tar -zxvf archive-name.tar.gz
-$ tar -zxvf archive-name.tar.gz -C /tmp/extract-here/
-# tar查看包内文件列表
-$ tar -tf slow.tar
-$ tar -tzf slow.tar.gz
-# 只解压一个文件 
-$ tar -xf aa.tar path/to/file
-# 只解压一个文件 file 到目录 abc
-$ tar -C abc -xf aa.tar path/to/file
+    $ gzip -d abc.gz
 
-# bz2 压缩率好一些
-$ tar -jcvf archive-name.tar.bz2 directory-to-compress
-$ tar -jxvf archive-name.tar.bz2 -C /tmp/extract-here/
+    $ tar -zcvf archive-name.tar.gz directory-to-compress
+    $ tar -zxvf archive-name.tar.gz
+    $ tar -zxvf archive-name.tar.gz -C /tmp/extract-here/
+    # tar查看包内文件列表
+    $ tar -tf slow.tar
+    $ tar -tzf slow.tar.gz
+    # 只解压一个文件 
+    $ tar -xf aa.tar path/to/file
+    # 只解压一个文件 file 到目录 abc
+    $ tar -C abc -xf aa.tar path/to/file
 
-$ tar -cvf archive-name.tar directory-to-compress
-$ tar -xvf archive-name.tar.gz
-$ tar -xvf archive-name.tar -C /tmp/extract-here/
-```
+    # bz2 压缩率好一些
+    $ tar -jcvf archive-name.tar.bz2 directory-to-compress
+    $ tar -jxvf archive-name.tar.bz2 -C /tmp/extract-here/
+
+    $ tar -cvf archive-name.tar directory-to-compress
+    $ tar -xvf archive-name.tar.gz
+    $ tar -xvf archive-name.tar -C /tmp/extract-here/
+    ```
 xz压缩
 xz压缩文件方法或命令
 xz -z 要压缩的文件
@@ -431,6 +468,14 @@ fuser -km /nfsdata
 -k  kill
 -m  mount
 
+## mount usb
+USB移动存储设备通常被识别为sda1，具体可以通过fdisk -l命令查询。
+新建一个子目录`mkdir /mnt/usb`, 然后我们就可以接上我的U盘了，然后在终端下输入命令并击Enter键即可：
+
+    mount /dev/sda1 /mnt/usb
+在Windows下当我们用完U盘后，在我们取下U盘前我们先要删除，同样在Linux下我们也要删除挂起点，方法是：
+
+    umount /dev/sda1 /mnt/usb 或 umount /dev/sda1
 ## bash
 查找历史命令 Ctrl-r
 熟悉bash的作业管理，如： &, Ctrl-Z, Ctrl-C, jobs, fg, bg, kill, 等等。当然，你也要知道Ctrl+\（SIGQUIT）和Ctrl+C （SIGINT）的区别
@@ -444,6 +489,7 @@ fuser -km /nfsdata
 如果你有输了个命令行，但是你改变注意了，但你又不想删除它，因为你要在历史命令中找到它，但你也不想执行它。那么，你可以按下 Alt-# ，于是这个命令关就被加了一个#字符，于是就被注释掉了
 
 ## 数据处理
+排序，　去重　，　去重复
 
     了解 sort 和 uniq 命令 (包括 uniq 的 -u 和 -d 选项).
 
@@ -451,15 +497,6 @@ fuser -km /nfsdata
 
     如果你知道怎么用sort/uniq来做集合交集、并集、差集能很大地促进你的工作效率。假设有两个文本文件a和b已解被 uniq了，那么，用sort/uniq会是最快的方式，无论这两个文件有多大（sort不会被内存所限，你甚至可以使用-T选项，如果你的/tmp目录很小）
 
-## xargs
-删除aa目录中与bb目录同名的文件  
-
-    ls bb |xargs -i rm ~/temp/d3/aa/{}
-删除find 找到的文件
-
-    find aa | xargs rm
-
-目录中文件重命名,加上.bak( -t 表示先打印出命令)    ls |xargs -t -i mv {} {}.bak
 ## scp
 scp 远端的时候，你可以按tab键来查看远端的目录和文件
 
@@ -531,4 +568,5 @@ echo "02-1" | bc
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
 http://wangheng.org/ubuntu-12-04-source-list.html
 
-[1]: http://blog.csdn.net/chen3888015/article/details/7432868
+[1]: http://blog.csdn.net/chen3888015/article/details/7432868  
+[2]: https://github.com/guard/listen/wiki/Increasing-the-amount-of-inotify-watchers

@@ -19,3 +19,7 @@
     location /static {
         alias  /srv/web/static
     }
+
+上传文件大小 
+
+	client_max_body_size 10M

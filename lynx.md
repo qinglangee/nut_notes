@@ -1,5 +1,34 @@
+## lynx 使用说明
 配置文件位置
 /etc/lynx-cur/lynx.cfg
+
+## 常用命令
+
+*操作t*
+d : 下载当前链接
+g : 跳转到新链接
+/：   在当前页内查找字符串。  
+n：   搜索下一个。
+
+*历史*
+V：   跳转到访问过的地址。 
+[backspace]：  跳转到历史页(同   V   命令)。 
+
+*帮助*
+k：   显示键盘命令列表。  
+
+
+滚动命令：  
++,Page-Down,Space,Ctrl+f：   向下翻页。  
+-,Page-Up,b,Ctrl+b：  向上翻页。  
+Ctrl+a：   移动到当前页的最前面。  
+Ctrl+e：   移动到当前页的最后面。  
+Ctrl+n：   向下翻两行。  
+Ctrl+p：   往回翻两行。  
+)：   向下翻半页。  
+(：   往回翻半页。 
+
+
 
 
 Lynx
@@ -44,10 +73,8 @@ setenv   WWW_HOME   http://www.w3.org/default.html
 左方向键：回到上一个页面。  
 
 滚动命令：  
-+,Page-Down,Space,Ctrl+f：  
-向下翻页。  
--,Page-Up,b,Ctrl+b：  
-向上翻页。  
++,Page-Down,Space,Ctrl+f：   向下翻页。  
+-,Page-Up,b,Ctrl+b：  向上翻页。  
 Ctrl+a：   移动到当前页的最前面。  
 Ctrl+e：   移动到当前页的最后面。  
 Ctrl+n：   向下翻两行。  
@@ -177,3 +204,7 @@ $ lynx -display_charset=gb2312 http://www.htexam.net/
 使用w3m代替lynx：
 
 $ w3m http://www.htexam.net/
+
+
+refs:  
+[命令行下使用浏览器的方法](http://www.bitscn.com/os/linux/200904/158516.html)  

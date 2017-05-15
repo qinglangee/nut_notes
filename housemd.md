@@ -1,6 +1,7 @@
   vim: ft=markdown   
 # 常用命令
 
+已停止更新，作者推荐  greys-anatomy  https://github.com/oldmanpushcart/greys-anatomy
 ## 启动
 
     $ java -Xbootclasspath/a:$JAVA_HOME/lib/tools.jar -jar housemd_x.x.x-x.x.x.min.jar [OPTIONS] <pid>

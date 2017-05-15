@@ -1,7 +1,7 @@
    vim:ft=markdown  
 # 脚本编程  链接
 
-## 使用Bash编写Linux Shell脚本-6.表达式 
+## 使用Bash编写Linux Shell脚本-6.表达式
 http://blog.csdn.net/fox_lht/article/details/5894940
 
 ## 脚本示例
@@ -16,7 +16,11 @@ read 读取文本行
     do
         echo 123
     done
+循环目录
 
+    for dir in `ls $rootDir` ; do
+        echo $dir
+    done
 ## 常用
 ### 传参数
 显示参数
@@ -30,11 +34,11 @@ read 读取文本行
 
     ls aa.txt
     vim !!:$
-!^ 从上一条命令获得第一项参数： 
+!^ 从上一条命令获得第一项参数：
 
-    # cp anaconda-ks.cfg anaconda-ks.cfg.bak 
-    anaconda-ks.cfg 
-    # vi -5 !^ 
+    # cp anaconda-ks.cfg anaconda-ks.cfg.bak
+    anaconda-ks.cfg
+    # vi -5 !^
     vi anaconda-ks.cfg
 ### 根据模板删除字串（ % ， # ， %% ， ## ）
 
@@ -59,10 +63,10 @@ ${#VARIABLE_NAME} 可以给出字符串的长度。
 ### 获取目录名和文件名
 -- To find base directory
 APP_ROOT=`dirname "$0"`
- 
+
 -- To find the file name
 filename=`basename "$filepath"`
- 
+
 -- To find the file name without extension
 filename=`basename "$filepath" .html`
 
@@ -79,141 +83,35 @@ $cd !$
 ## 语法
 case 语法
 
-    case $1 in 
-    a) echo alpha;; 
-    b) echo beta;; 
-    c) echo coda;; 
-    *) echo other;; 
+    case $1 in
+    a) echo alpha;;
+    b) echo beta;;
+    c) echo coda;;
+    *) echo other;;
     esac
+while 循环
 
+    while [ ]
+    do
+        echo abc
+    done
 大小判断
 
     if [[ $# -eq 0 ]];then exit 0;fi;    # 数字相等
+数学运算
 
-    整数比较
+    a=1
+    b=$[$a+2]
+    echo $b    # 3
+*其它比较和字符串等比较参见 wordpress/bash/2015-05-13-if_string_num.mkd*
 
-    -eq
-
-        等于
-
-        if [ "$a" -eq "$b" ]
-    -ne
-
-        不等于
-
-        if [ "$a" -ne "$b" ]
-    -gt
-
-        大于
-
-        if [ "$a" -gt "$b" ]
-    -ge
-
-        大于等于
-
-        if [ "$a" -ge "$b" ]
-    -lt
-
-        小于
-
-        if [ "$a" -lt "$b" ]
-    -le
-
-        小于等于
-
-        if [ "$a" -le "$b" ]
-    <
-
-        小于(在双括号中使用)
-
-        (("$a" < "$b"))
-    <=
-
-        小于等于(在双括号中使用)
-
-        (("$a" <= "$b"))
-    >
-
-        大于(在双括号中使用)
-
-        (("$a" > "$b"))
-    >=
-
-        大于等于(在双括号中使用)
-
-        (("$a" >= "$b"))
-
-    字符串比较
-
-    =
-
-        等于
-
-        if [ "$a" = "$b" ]
-    ==
-
-        等于
-
-        if [ "$a" == "$b" ]
-
-        与=等价.
-
-        Note  
-
-        ==比较操作符在双中括号对和单中括号对中的行为是不同的.
-
-          1 [[ $a == z* ]]    # 如果$a以"z"开头(模式匹配)那么结果将为真
-          2 [[ $a == "z*" ]]  # 如果$a与z*相等(就是字面意思完全一样), 那么结果为真.
-          3 
-          4 [ $a == z* ]      # 文件扩展匹配(file globbing)和单词分割有效. 
-          5 [ "$a" == "z*" ]  # 如果$a与z*相等(就是字面意思完全一样), 那么结果为真. 
-          6 
-          7 # 感谢, Stephane Chazelas
-
-    !=
-
-        不等号
-
-        if [ "$a" != "$b" ]
-
-        这个操作符将在[[ ... ]]结构中使用模式匹配. 
-    <
-
-        小于, 按照ASCII字符进行排序
-
-        if [[ "$a" < "$b" ]]
-
-        if [ "$a" \< "$b" ]
-
-        注意"<"使用在[ ]结构中的时候需要被转义. 
-    >
-
-        大于, 按照ASCII字符进行排序
-
-        if [[ "$a" > "$b" ]]
-
-        if [ "$a" \> "$b" ]
-
-        注意">"使用在[ ]结构中的时候需要被转义.
-
-        参考例子 26-11, 这个例子展示了如何使用这个比较操作符. 
-    -z
-
-        字符串为"null", 意思就是字符串长度为零
-    -n
-
-        字符串不为"null".
-
-        Caution 
-
-        当-n使用在中括号中进行条件测试的时候, 必须要把字符串用双引号引用起来. 如果采用了未引用的字符串来使用! -z, 甚至是在条件测试中括号(参见例子 7-6)中只使用未引用的字符串的话, 一般也是可以工作的, 然而, 这是一种不安全的习惯. 习惯于使用引用的测试字符串才是正路. [1] 
 
     ## 脚本调试
 
     ### -n 参数
 
     “-n”可用于测试shell脚本是否存在语法错误，但不会实际执行命令
-    ### 命令行选项 -x 
+    ### 命令行选项 -x
     http://coolshell.cn/articles/1379.html
     [bash脚本调试方法 ](http://blog.csdn.net/jjaing/article/details/5385637)
 
@@ -241,6 +139,5 @@ $ bash -x aa.sh
     }
 
 ### 使用bash专用调试器
-[bashdb](http://bashdb.sourceforge.net/)
-[文档](http://bashdb.sourceforge.net/bashdb.html)
-
+[bashdb](http://bashdb.sourceforge.net/)  
+[文档](http://bashdb.sourceforge.net/bashdb.html)  

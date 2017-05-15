@@ -1,4 +1,4 @@
-淘宝
+# 淘宝
 
 分布式key/value存储系统 Tair
 http://code.taobao.org/p/tair/wiki/index/
@@ -34,8 +34,10 @@ SSDB - A fast NoSQL database server with zset data type, an alternative to Redis
 http://itindex.net/detail/20775-beanstalkd-%E6%80%A7%E8%83%BD-%E5%86%85%E5%AD%98
 之前在微博上调查过大家正在使用的分布式内存队列系统，反馈有Memcacheq,Fqueue, RabbitMQ , Beanstalkd以及linkedin的kafka
 
+## 淘宝镜像
+[npm 镜像](https://npm.taobao.org/)  
 
-百度
+# 百度
 
 Tangram是Baidu开发的一套简单可依赖的Javascript库
 http://www.oschina.net/p/tangram

@@ -1,3 +1,9 @@
+# wmctrl 使用
+
+## 安装 
+sudo apt install wmctrl
+
+## 使用
 使用wmctrl控制窗口行为使用wmctrl控制窗口行为
 2008年04月08日 星期二 , 1,260 次点击
 

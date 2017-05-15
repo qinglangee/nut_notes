@@ -6,7 +6,10 @@
     mongo 192.168.1.21:27017/dovebox
 
     $ help()
+    show dbs;
+    use db_name;
     $ db.help()
+    show tables;
     $ db.table_name.help()
 [连接字符串][1]  
 
@@ -17,13 +20,20 @@
 # 工具
 ## gui
 
-gui  Robomongo http://robomongo.org/ 
+gui  Robomongo http://robomongo.org/
 ## 备份
 
     // 导出数据
     mongodump -h 192.168.1.123 --port 12345 -d dbname -o /tmp/mongo_data
     // 恢复/导入数据
     mongorestore -h dbhost -d dbname --directoryperdb /tmp/mongo_data/dbname
+## 备份集合数据
+
+    // 导出集合数据
+    mongoexport -h 127.0.0.1 -d dbname -c collection_name  -o output_name.json
+    mongoexport --host dds-m5e9665f4xxxyyyzzz.mongodb.rds.aliyuncs.com:3717  -d leadread -c source_from -o /tmp/lead_from.json  --authenticationDatabase admin  -u root
+    // 导入集合数据
+    mongoimport -h 127.0.0.1 -d dbname -c collection_name --file input_file_name.json
 
 # 增删改查
 
@@ -48,8 +58,11 @@ db.users.insert({"name":"aa", "age":12});
 
 ## 多条翻页, 下一页
 it
+## 嵌套查询
+一定要引号包围字段名　　`db.data.find({"from.name":"qidian"})`
+## 查询中两个字段比较
 
-
+    db.web_user_match.find({gid:1000901, $where:"this.match_score >= this.matching_rate"},{gid:1,match_score:1,matching_rate:1});
 ## 包含查询
 I have blogpost collection, and blogpost has a tags filed which is an array, e.g.
 
@@ -68,7 +81,12 @@ Try this:
     db.blogpost.find({ 'tag' : 'tag1'}); //1
     db.blogpost.find({ 'tag' : { $all : [ 'tag1', 'tag2' ] }}); //2
     db.blogpost.find({ 'tag' : { $in : [ 'tag3', 'tag4' ] }}); //3
+## group  Aggregation
+mongodb 中Aggregation可以实现 `group by` 功能
 
+    db.web_user_match.aggregate([{$match:{gid:{$gt:0}}}, {$group:{_id:"$gid",total:{$sum:1}}}])
+
+详细内容见 2016-01-29-aggregation.md
 ## 更新
 
     // 查询, 更新
@@ -92,7 +110,7 @@ Try this:
 test
 2. $ db.dropDatabase()
 3. $ db.foo.drop()
-4. 赋值 
+4. 赋值
 $ var temp = db.ttt.findOne({type:1234});
 
 
@@ -149,11 +167,11 @@ Mongodb能为前缀型的正则表达式命中索引，比如：需要查询Mail
     db.system.profile.drop()
     db.createCollection( "system.profile", { capped: true, size:4000000 } )
     db.setProfilingLevel(1)
-日志切换 
+日志切换
 
     use admin
     db.runCommand( { logRotate : 1 } )
-查看 working set 大小 
+查看 working set 大小
 
     db.runCommand( { serverStatus: 1, workingSet: 1 } )
 查看连接数
@@ -175,7 +193,7 @@ Mongodb能为前缀型的正则表达式命中索引，比如：需要查询Mail
     /usr/local/mongodb-linux-x86_64-2.4.10/bin/mongod --dbpath /data/mongo_2.4.10/data
 也可以指定一些其它的东西, 比如在配置文件中设置一些配置, 在启动时指定配置文件
 
-    /usr/bin/mongod -f /etc/mongod.conf 
+    /usr/bin/mongod -f /etc/mongod.conf
 /etc/mongod.conf的内容如下
 
     #where to log
@@ -194,10 +212,10 @@ Mongodb能为前缀型的正则表达式命中索引，比如：需要查询Mail
 
     # location of pidfile
     pidfilepath = /var/run/mongodb/mongod.pid
-        
+
 ## 配置
 权限验证, 见wordpress  
-配置文件中设置 
+配置文件中设置
 
     auth=true
 用户名密码登录
@@ -215,7 +233,7 @@ Mongodb能为前缀型的正则表达式命中索引，比如：需要查询Mail
 
 
 
-refs: 
+refs:
 [Connection String URI Format][1]  
 
 

@@ -7,7 +7,7 @@
 
 7.0. code style -> line wrapping   120, Tab Policy: space only / 4:q
 
-7.1. formate  @param后面不换行 
+7.1. formate  @param后面不换行
 7.2. blank line before javadoc tag  去掉
 
 8.去掉templet 里的syserr
@@ -18,7 +18,7 @@
 debug,
 outline,breakpoint,variable,
 console,servers
-13.下一个anotation, 去掉warning
+13.下一个anotation, 去掉warning(工具栏的 next anotation图标右边有个下拉箭头，把里面的 warning 前的勾去掉)
 14. 配置validation相关内容
 
 
@@ -33,6 +33,12 @@ public static void main(String[] args) {
     t.test();
 }
 
+pubb 构造函数
+
+public ${enclosing_type}() {
+    ${cursor}
+}
+
 
 
 
@@ -42,3 +48,5 @@ http://beust.com/eclipse    org.testng.eclipse_6.4.0.20120308_1617.jar
 
 zencoding
 https://github.com/sergeche/eclipse-zencoding
+
+color theme 颜色管理 （market 搜索）
