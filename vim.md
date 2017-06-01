@@ -8,6 +8,9 @@ nutsstore有历史版本, ok了
 
     ctrl + o
     ctrl + i   取消ctrl+o的操作
+## 锁定　死锁　无反应
+Ctrl-s
+Ctrl-q 可以解锁
 
 ## 大小写转换
 单词转换为大写   gUw  单词转换为小写  guw

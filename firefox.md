@@ -5,6 +5,9 @@
 1.按住 Alt 的同时选文字 
 2.F7进入文字编辑模式, 用键盘选中
 
+## 关闭 popup blocker
+go to `Edit > Preferences > Content` or `Tools > Options > Content` and uncheck Block pop-up windows
+
 ## 插件问题
 
 1. 本来需要在TabMixPlus中设置才会紧邻当前标签右侧打开， 现在默认就是这样，还改不了，很不习惯 [ 更新火狐43.0.4，默认不在最右侧开标签了，怎么恢...][1]

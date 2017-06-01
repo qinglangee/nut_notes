@@ -253,8 +253,25 @@ For example, you can run a backup of all your user accounts at 5 a.m every week 
 其中2>&1  指将STDERR重定向到前面标准输出定向到的同名文件中，即&1就是nohup.log
 那么结果就是当执行的命令发生标准错误，那么这个错误也会输出到你指定的输出文件中 
 
+## setxkbmap 
+另一种方法是使用 setxkbmap 命令（参考资料 [2]）。只需执行下面的命令：
+`setxkbmap -option ctrl:swapcaps`, 这个命令执行多次是一个效果
 
+## xmodmap 键位映射  [xmodmap修改键映射][10] [交换 ctrl 和 caps lock][11]
+man xmodmap中有几个例子
 
+交换control 和caps lock, 编辑一个文件 exchange, 内容如下:
+
+    ! Swap Caps_Lock and Control_L
+    !
+    remove Lock = Caps_Lock
+    remove Control = Control_L
+    keysym Control_L = Caps_Lock
+    keysym Caps_Lock = Control_L
+    add Lock = Caps_Lock
+    add Control = Control_L
+然后运行命令 `xmodmap exchange`, 再次运行就交换回来了
+如果不想每次启动都手动输入命令，可以把命令写到 ~/.xinitrc 中。注意如果把命令写到 ~/.bashrc 中，每次新开一个终端或 tab 上述命令都会被执行一次，这样键位又换回来了。
 
 
 # ===========================================
@@ -300,3 +317,5 @@ refs:
 [7]: http://inai.de/2008/02/19
 [8]: http://www.tuicool.com/articles/Q3QNru
 [9]: https://unix.stackexchange.com/questions/36380/how-to-properly-and-easy-configure-xdg-open-without-any-enviroment
+[10]: blog.csdn.net/lqk1985/article/details/5152115AC
+[11]: http://ouonline.net/swap-ctrl-capshttp://ouonline.net/swap-ctrl-capshttp://ouonline.net/swap-ctrl-caps

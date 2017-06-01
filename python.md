@@ -1,8 +1,8 @@
-  vim: ft=markdown
-# 工具
+# python 常用知识  
+## 工具
 *pip* 包管理器
 
-# 语法
+## 语法
 导入模块
 
 	import os
@@ -34,13 +34,15 @@ print 实时刷新
 	print sys.argv[1] ## 第一个参数
 	print len(sys.argv) # 没参数时是 1
 
-# 常用函数
+## 常用函数
+
 
 数字变为字符串 `str(4)`
 字符串变为数字 `string.atoi(s,[，base]) //base为进制基数`
 浮点数转换 `string.atof(s)`
 字符转数字 `int(str)`
 
+## 字符串操作
 字符串替换 
 
 	a = 'hello word'  # 我把a字符串里的word替换为python
@@ -77,3 +79,38 @@ print 实时刷新
 
 	content.startswith("ilove")
 	content.endswith("ilove")
+    str.startswith(str, beg=0,end=len(string));
+    str.startswith( 'is', 2, 4 )
+    
+## 文件操作
+文件复制,删除,目录复制一类的
+shutil [文档][1]
+
+## 目录
+`import os`
+`os.path.exists(path)` 判断一个目录是否存在
+`os.makedirs(path)` 多层创建目录
+`os.mkdir(path)` 创建目录
+
+## 文件名
+```
+import os
+f = "a/b/c/d.txt"
+name, ext = os.path.splitext(f)
+print name, ext
+print os.path.dirname(f)
+print os.path.basename(f)
+```
+结果
+>a/b/c/d .txt
+a/b/c
+d.txt
+
+## 自定义排序
+
+`productlist.sort(lambda p1, p2:cmp(p1.getPrice(), p2.getPrice()))`
+
+
+
+
+[1]: https://docs.python.org/2/library/shutil.html
