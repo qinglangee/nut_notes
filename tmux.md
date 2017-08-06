@@ -41,9 +41,10 @@ sudo apt-get install tmux
 `prefix x`  关闭面板
 `prefix ＆`  关闭窗口
 `prefix d`  退出tumx，并保存当前会话，这时，tmux仍在后台运行，可以通过tmux attach进入 到指定的会话
-`PREFIX ,`  窗口重命名
+`prefix ,`  窗口重命名
 `prefix f`  find,查找窗口
 `prefix w`  window,窗口列表
+`prefix $`  重命名当前session
 
 ## 常用命令
 `tmux new -s session_name` 创建新的session

@@ -88,7 +88,7 @@ mongodb 中Aggregation可以实现 `group by` 功能
 
 详细内容见 2016-01-29-aggregation.md
 ## 更新
-
+```
     // 查询, 更新
     db.content_basic.find({_id:{$gt:35558015},aid:{$in:[961205,961206]}}).forEach(
         function(x){
@@ -96,7 +96,7 @@ mongodb 中Aggregation可以实现 `group by` 功能
             db.content_basic.update({_id:x._id}, x);
         }
     )
-
+```
 更新
 
     db.analyze_job_done.update({a:b},{$set:{time:new Date(2012,11,12)}})   // 这个只会更新符合条件的第一条

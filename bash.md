@@ -80,33 +80,9 @@ $mkdir mydir
 $mv !$ yourdir
 $cd !$
 
-## 语法
-case 语法
-
-    case $1 in
-    a) echo alpha;;
-    b) echo beta;;
-    c) echo coda;;
-    *) echo other;;
-    esac
-while 循环
-
-    while [ ]
-    do
-        echo abc
-    done
-大小判断
-
-    if [[ $# -eq 0 ]];then exit 0;fi;    # 数字相等
-数学运算
-
-    a=1
-    b=$[$a+2]
-    echo $b    # 3
-*其它比较和字符串等比较参见 wordpress/bash/2015-05-13-if_string_num.mkd*
 
 
-    ## 脚本调试
+## 脚本调试
 
     ### -n 参数
 

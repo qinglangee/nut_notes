@@ -145,7 +145,7 @@ bin
 把一分支aa push 到仓库
 
     git push --set-upstream origin aa
-## 后悔相关的 ck revert
+## 后悔相关的 ck revert reset
 
 把一个文件换回最新commit
 
@@ -155,7 +155,9 @@ bin
 回退一次提交  (revert 只回退指定提交的修改, 如果有三次需要回退要回退三次, 不能直接回退前面第三次)
 
     git revert 78dyh6e
-git 交互式操作
+
+强制丢掉所有未提交修改 `git reset --hard`
+## git 交互式操作
 
     git add -i
 git 合并提交

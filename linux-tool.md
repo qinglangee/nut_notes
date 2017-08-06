@@ -57,7 +57,7 @@ gpg: Can't check signature: No public key
     if [ "$newer" == "$1" ];then...else...fi
 查看特定类型的文件
 
-    find -name '*.xml' -exec grep b  {} \; -print
+    `find -name '*.xml' -exec grep b  {} \; -print`
 删除　find 找到的文件
 
     find aa |xargs rm
@@ -82,11 +82,12 @@ find默认会递归遍历所有子目录，如果想只在当前目录查找，�
 文件重命名
 >rename --help
 call: rename from to files...
-
+```
     rename  aaa bbb  *.aaa  # 替换内容
     rename .bak ""  *.bak   # 去掉.bak后缀
-
+```
 ## grep
+
 从配置文件中取值,赋值给变量 ZOO_LOG_DIR
 dataDir=/home/lifeix/temp/appdata/zookeeper
 
