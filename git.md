@@ -123,7 +123,7 @@ bin
 
     git ls-files -v　　＃忘了哪个假装了，可以这样查看，　假装的前面是小写h
 
-## branch 相关的
+## branch 分支相关的
 新建/删除分支
 
     git branch aa  # 新建分支 aa
