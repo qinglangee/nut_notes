@@ -137,7 +137,7 @@ $ var temp = db.ttt.findOne({type:1234});
     db.Mail.find({user:'zhaoxy1@szdep.com',folderId:'inbox'}).hint({ age: 1 })
 如果你查找的值正好是在索引中，则可以直接返回索引中存的值，而不用到数据文件中查找。（这个在传统关系型数据库中也有实现），不过，必须满足以下条件： 
 1. 必须提供准备的返回字段，以便可以直接从索引库中查询 
-2. 必须明确地排除使用 *_id*字段 `{_id：0}`
+2. 必须明确地排除使用 `_id`字段 `{_id：0}`
 
 当用explain时，当indexOnly=true，表示有用到covered index
 

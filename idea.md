@@ -26,3 +26,6 @@ MainMenu->Code->Completion->Basic  Alt-j
 ## 内存不够用
 Application -> Android Studio 显示包内容，然后Contents -> bin -> studio.vmoptions这个文件
 -Xms和-Xmx后面的值都改大一些，默认750M完全不够用的
+
+## 界面字体修改
+`File -> Settings -> Appearance`, 将字体改为 `WenQuanYi Micro Hei`
