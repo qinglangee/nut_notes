@@ -88,16 +88,26 @@ call: rename from to files...
 ```
 ## grep
 
-从配置文件中取值,赋值给变量 ZOO_LOG_DIR
+一些参数
+```
+-F, --fixed-strings       PATTERN is a set of newline-separated strings
+-f, --file=FILE           obtain PATTERN from FILE
+-v, --invert-match        select non-matching lines
+```
+从配置文件中取值,赋值给变量 ZOO_LOG_DIR, 
+```
 dataDir=/home/lifeix/temp/appdata/zookeeper
-
-    ZOO_LOG_DIR=$(grep "^[[:space:]]*dataDir" "$ZOOCFG" | sed -e 's/.*=//')
-查看特定类型的文件
-
-    grep -R --include="*.cpp" aaabbb  ./src
-同样的功能, 用find的exec参数
-
-    find -name '*.xml' -exec grep b  {} \; -print
+ZOO_LOG_DIR=$(grep "^[[:space:]]*dataDir" "$ZOOCFG" | sed -e 's/.*=//')`
+```
+查看特定类型的文件 `grep -R --include="*.cpp" aaabbb  ./src`
+同样的功能, 用find的exec参数 `find -name '*.xml' -exec grep b  {} \; -print`
+输出两个文件的交集，差集，合集　
+```
+grep -F -f a.txt b.txt | sort | uniq     　　　# 交集　
+grep -F -v -f a.txt b.txt | sort | uniq  　　　# 差集　b.txt - a.txt
+grep -F -v -f b.txt a.txt | sort | uniq       # 差集　a.txt - b.txt
+cat a.txt b.txt | sort | uniq                 # 合集
+```
 
 ## echo 
 使输出显示在一行
@@ -235,7 +245,7 @@ post 数据 json 格式    `curl --connect-timeout 15 -H "Content-Type: applicat
     wget    --ftp-user=xiaoxin --ftp-password=54321   -r ftp://10.10.10.10/tool/smc20
 
 ## cron 定时器
-服务重启 `service crond start` 或者有的系统是  `service cron start`
+服务重启 `service crond restart` 或者有的系统是  `service cron restart`
 编辑定时器  `crontab -e`
 
     m h  dom mon dow   command

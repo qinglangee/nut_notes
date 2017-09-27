@@ -17,3 +17,5 @@
 ### 文件管理器
 
     nautilus .
+### 打开终端
+`gnome-terminal` 或　`Ctrl-Alt-T`

@@ -15,9 +15,7 @@ SHOW CREATE TABLE example;
 mysql -h110.110.110.110 -uroot -pabcd123
 
 ## 查看建表语句
-
-    show create table web_job_skill;
-
+`show create table web_job_skill;`
 
 ### 查看所有数据库 / 所有表
 
@@ -36,35 +34,35 @@ mysql -h110.110.110.110 -uroot -pabcd123
     select distinct Grantee  from information_schema.user_privileges;
 
 ###  查看version
-select version();
+`select version();`
 
 ### 查看连接情况
-echo "show processlist" | mysql -uusername -p'password'  | awk '{print $3}' | awk -F : '{print $1}' | sort | uniq -dc
+`echo "show processlist" | mysql -uusername -p'password'  | awk '{print $3}' | awk -F : '{print $1}' | sort | uniq -dc`
 TestDBSkst$@  
 查看当前连接数量
-show status like '%Threads_connected%';
+`show status like '%Threads_connected%';`
 查看连接时间大于某一数值的
-SELECT id FROM information_schema.processlist WHERE State = 'Locked' AND Time > 10;
+`SELECT id FROM information_schema.processlist WHERE State = 'Locked' AND Time > 10;`
 查出kill语句
-SELECT concat('KILL ', id, ';') FROM information_schema.processlist WHERE State = 'Locked' AND Time > 10;
+`SELECT concat('KILL ', id, ';') FROM information_schema.processlist WHERE State = 'Locked' AND Time > 10;`
 
 ### 查看最大连接数
-show variables like 'max_connections';
+`show variables like 'max_connections';`
 要对 mysql 的最大连接数进行修改，只需要在 my.cnf 配置文件里面修改 max_connections 的值，然后重启 mysql 就行。如果 my.ini 文件中没有找到 max_connections 条目，可自行添加以下条目
 max_connections = 200
 
 命令设置当前最大连接数
-set GLOBAL max_connections=800;
+`set GLOBAL max_connections=800;`
 
 ### 查看sleep连接超时时间
-show variables like 'wait_timeout';
+`show variables like 'wait_timeout';`
 命令行设置超时时间
-set global wait_timeout=100;
+`set global wait_timeout=100;`
 
 
 ## 修改数据库引擎
 改为innodb
-alter table 表名 type = innodb;
+`alter table 表名 type = innodb;`
 
 改为myisam
 ALTER TABLE `dbname`.`tablename` engine = myisam row_format = dynamic;
@@ -220,21 +218,18 @@ CREATE UNIQUE INDEX user_collected_item ON eatables_collect (accountId, type, ta
 
 shell$ mysqlhotcopy db_name /path/to/some/dir
 只导出结构, 没有数据
-
-    mysqldump -d -h localhost -u root -pmypassword databasename > dumpfile.sql
+`mysqldump -d -h localhost -u root -pmypassword databasename > dumpfile.sql`
 导出部分表的结构和数据
-
-    mysqldump  -h 192.168.1.48 -u username -p（密码提示后再输入） college_2013 --tables college_info > dumpfile.sql
+`mysqldump  -h 192.168.1.48 -u username -p（密码提示后再输入） college_2013 --tables college_info > dumpfile.sql`
 导出数据
-
-    c:$ mysqldump -udb_username -pdb_password myplick > sqlname.sql
+`c:$ mysqldump -udb_username -pdb_password myplick > sqlname.sql`
 导出表的部分数据 
-
+```
     mysqldump -u用户名 -p密码 数据库名 表名 --where="筛选条件" > 导出文件路径
     mysqldump -uroot -p123456 dbname tablename --where=" sensorid=11 and fieldid=0" > /home/xyx/Temp.sql
     # max_allowed_packet
     mysqldump -uroot -p123456 --max_allowed_packet=100M  --net_buffer_length=1M dbname tablename > /home/xyx/Temp.sql
-
+```
  You can also set the following variables by using --var_name=value syntax:
 
     max_allowed_packet
@@ -260,8 +255,9 @@ shell$ mysqlhotcopy db_name /path/to/some/dir
 
     select * from user into outfile '/tmp/user.txt';
 
-
     select * from user into outfile '/tmp/user.txt' FIELDS TERMINATED BY ','  OPTIONALLY ENCLOSED BY '"' LINES TERMINATED BY '\n'； 
+命令行查询数据写入文件
+
 ### The MySQL Server returned this Error:MySQL Error Nr. MySQL server has gone away。
 
 解决的方法就是找到mysql安装目录，找到my.ini文件，在文件的最后添加： max_allowed_packet = 32M(也可以设置自己需要的大小)。 max_allowed_packet 参数的作用是，用来控制其通信缓冲区的最大长度。

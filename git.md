@@ -26,12 +26,9 @@
 >可以把．git作为一个普通ascii文件，　文件内容是  gitdir: <path>, i.e. the path to the real git repository).
  冒号后面一定要有空格
 
-查看所有配置   
-
-    git  config  -l(--list)
-全局配置保存位置
-
-    vim ~/.gitconfig
+查看所有配置 `git  config  -l(--list)`
+全局配置保存位置 `vim ~/.gitconfig`
+特定项目的配置文件，git　根目录下的 `.git/config` 文件
 删除配置项
 
     git config --unset --global user.name
@@ -139,12 +136,12 @@ bin
 
     git push origin :abc
     git push origin --delete abc
-从某一版本建立分支
+从某一版本建立分支 `git branch branchname HEAD^`
 
-    git branch branchname HEAD^
-把一分支aa push 到仓库
+把一分支aa push 到仓库,作为仓库的aa分支　`git push origin aa` 或　`git push origin aa:aa`
 
-    git push --set-upstream origin aa
+把一分支aa push 到仓库, 同时设置为源　 `git push --set-upstream origin aa`
+
 ## 后悔相关的 ck revert reset
 
 把一个文件换回最新commit
@@ -165,7 +162,9 @@ git 合并提交
     git add .
     git commit --amend  -am "修改订阅按钮样式"    # 这次提交会和上次提交合并成一次提交
 
-## diff 相关的
+## diff 相关的 (diff show)
+显示版本号的修改内容　`git show ad1585dbd85`
+
 比较文件不同
 
     # 前面是旧版本,后面是新版本
@@ -180,22 +179,7 @@ git 合并提交
 
     git diff feadf08ff^..feadf08ff      # 上一个版本号
     git diff feadf08ff^^..feadf08ff      # 上两个版本号
-查看文件历史
 
-    # 只查看一个文件的历史
-    git log filename
-    # 查看历史并显示修改的内容
-    git log -p filename
-    # 查看两个版本号之间的log
-    git log f58c2b52a4b..ad1585dbd85
-    # 查看版本号之前的log
-    git log f58c2b52a4b
-    # 查看版本号之后的log
-    git log f58c2b52a4b..
-查看每一行的最后提交
-
-    # 显示文件每一行的最后提交
-    git blame filename
 ## ignore 相关的
 gitignore分层
 * .gitignore           放项目公用,大家都用的
@@ -219,13 +203,26 @@ tag 与 branch同名,需要指明是tag, 默认是branch
 显示所有tags
 
     $ git tag
-    $ git tag -l 'v1.4.2.*'   #  如果你只对 1.4.2 系列的版本感兴趣
-## log 相关的
+    `$ git tag -l 'v1.4.2.*'`   #  如果你只对 1.4.2 系列的版本感兴趣
+## log 相关的 查看文件历史
 git log 有许多选项可以帮助你搜寻感兴趣的提交，接下来我们介绍些最常用的。
-我们常用 -p 选项展开显示每次提交的内容差异，用 -2 则仅显示最近的两次更新    
 
-    git log -p
-    git log -2
+用 -2 则仅显示最近的两次更新 `git log -2`
+
+只查看一个文件的历史 `git log filename` 单行显示　`git log --pretty=oneline filename`
+
+查看历史并显示修改的内容 `git log -p filename`
+
+查看两个版本号之间的log `git log f58c2b52a4b..ad1585dbd85`
+
+查看版本号之前的log `git log f58c2b52a4b`
+
+查看版本号之后的log `git log f58c2b52a4b..`
+
+查看每一行的最后提交
+
+    # 显示文件每一行的最后提交
+    git blame filename
 ## 其它不常用的
 只全并一个commit的内容
 

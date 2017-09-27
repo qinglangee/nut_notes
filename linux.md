@@ -162,13 +162,14 @@ dig -x host
 所以把IP显示到标题上，就方便了很多了。在网上找到这种方法，不错，不错，呵呵。记录一下，方便以后使用。
 
 把下面的几行脚本追加到 ~/.bashrc(对应 root 用户，也就是 /root/.bashrc 文件)自动脚本的最后。
-
+```
     # Auto add env parameter $PROMPT_COMMAND when use non-Linux tty login by ssh.
     if [ "$SSH_CONNECTION" != '' -a "$TERM" != 'linux' ]; then
         declare -a HOSTIP
         HOSTIP=`echo $SSH_CONNECTION |awk '{print $3}'`
         export PROMPT_COMMAND='echo -ne "\033]0;${USER}@$HOSTIP:[${HOSTNAME%%.*}]:${PWD/#$HOME/~} \007"'
     fi
+```
 # 命令简介
 ## 系统监控命令
 iostat
