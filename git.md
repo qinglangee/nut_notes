@@ -138,7 +138,7 @@ bin
     git push origin --delete abc
 从某一版本建立分支 `git branch branchname HEAD^`
 
-把一分支aa push 到仓库,作为仓库的aa分支　`git push origin aa` 或　`git push origin aa:aa`
+把一分支aa push 到仓库,作为仓库的aa分支　`git push origin aa` 或　`git push origin aa:aa`, 一般都用下面这种同时设置为源，要不下次push还要写全路径
 
 把一分支aa push 到仓库, 同时设置为源　 `git push --set-upstream origin aa`
 

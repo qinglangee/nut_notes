@@ -43,45 +43,8 @@ print 实时刷新
 字符转数字 `int(str)`
 
 ## 字符串操作
-字符串替换 
+2017-09-28-string_functions.md
 
-	a = 'hello word'  # 我把a字符串里的word替换为python
-
-	1用字符串本身的replace方法
-	a.replace('word','python')
-
-	2用正则表达式来完成替换:
-	import re
-	strinfo = re.compile('word')
-	b = strinfo.sub('python',a)
-	print b
-	输出的结果也是hello python
-字符串包含
-
-	if("aa" in "aabc"):
-		print "aa in aabc"  # true false
-	index = "abcdaabc".find("aa")  # index == 4
-字符串去两头空格
-
-	str = "  aa  "
-	str.strip()
-字符串截取
-	
-	aa = "123456"
-	a1 = aa[:-1]  # 12345
-	a2 = aa[1:]  # 23456
-	a3 = aa[1:3]  # 23
-	a4 = aa[2:4]  # 34
-	a5 = aa[0:3]  # 123
-	a6 = aa[0:]  # 123456
-	a6 = aa[0:12]  # 123456
-字符串开头结尾
-
-	content.startswith("ilove")
-	content.endswith("ilove")
-    str.startswith(str, beg=0,end=len(string));
-    str.startswith( 'is', 2, 4 )
-    
 ## 文件操作
 文件复制,删除,目录复制一类的
 shutil [文档][1]

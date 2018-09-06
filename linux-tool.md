@@ -134,6 +134,10 @@ uniq
 
     split -l 5000  test.txt   # 切分文件，每个 5000 行， 默认每个 1000行
     split -b 100m test.txt    # 切分文件，每个 100M 
+    split -n 10 test.txt    # 切分文件，平分成10个
+    split -n 10 -d test.txt    # -d 以数字命名切分文件
+    split -n 10 --numeric-suffixes=1 test.txt    #  --numeric-suffixes=1 以数字命名切分文件,指定开始的数字
+    split -n 10 --additional-suffix=.txt test.txt    # --additional-suffix=.txt 切分文件后缀
     
     split -b 4000k skype_backup.tar.gz skype_backup.tar.gz.
 
@@ -182,9 +186,8 @@ date 输出格式， 查看 `date --help`
     date +"%Y%m%d"
     date +%Y-%m-%d     # 没有引号也可以
     date "+%Y-%m-%d %T"     # 中间有空格就必须加引号
-输出昨天的时间
-
-    date -d yesterday
+输出昨天的时间  `date -d yesterday`
+时间戳转换成时间  `date -d @1507761508`
 
 ## xdg-open
 使用文件的默认打开软件打开文件　`xdg-open  filename`
@@ -311,8 +314,35 @@ man xmodmap中有几个例子
 查看端口是否打开
 
     nc -v host port
+## basename dirname
+获取目录名和文件名
+-- To find base directory
+APP_ROOT=`dirname "$0"`
 
+-- To find the file name
+filename=`basename "$filepath"`
 
+-- To find the file name without extension
+filename=`basename "$filepath" .html`
+${}用于字符串的读取，提取和替换功能，可以使用${} 提取字符串
+```    
+    1、提取文件名
+    [root@localhost log]# var=/dir1/dir2/file.txt
+    [root@localhost log]# echo ${var##*/}
+    file.txt
+    2、提取后缀
+    [root@localhost log]# echo ${var##*.}
+    txt
+    3、提取不带后缀的文件名，分两步
+    [root@localhost log]# tmp=${var##*/}
+    [root@localhost log]# echo $tmp
+    file.txt
+    [root@localhost log]# echo ${tmp%.*}
+    file
+    4、提取目录
+    [root@localhost log]# echo ${var%/*}
+    /dir1/dir2
+```
 
 
 
