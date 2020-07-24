@@ -11,6 +11,9 @@ sqlite3　或　sqlite3.exe
 `.help`  显示帮助
 `.database` 显示数据库文件名
 `.tables`  显示所有表名
+## 界面管理工具
+SQLiteStudio 下载地址：https://sqlitestudio.pl/index.rvt?act=download
+
 ## 索引
 
 新建唯一索引: 

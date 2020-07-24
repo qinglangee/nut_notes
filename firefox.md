@@ -27,6 +27,10 @@ session, 保存的窗口
 firefox 备份 
 [官方教程](http://support.mozilla.org/zh-CN/kb/%E7%AE%A1%E7%90%86%E7%94%A8%E6%88%B7%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6)  
 
-
+# 配置修改
+地址  about:config
+## 标签页
+browser.tabs.insertAfterCurrent   true 加号新增的标签页
+browser.tabs.insertRelatedAfterCurrent   true 页面中链接打开的新标签页
 
 [1]: http://mozilla.com.cn/forum.php?mod=viewthread&tid=352790&page=1&extra=#pid353475

@@ -1,6 +1,10 @@
   vim: ft=markdown
 
 # 命令
+## 新版命令
+`magick aa.png bb.jpg`
+
+## 旧的命令
 查看支持的图片类型
 
     identify -list format

@@ -5,6 +5,11 @@ java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address="8000" -jar ab.jar
 
 eclipsｅ　中打开Debuge 配置界面, 新建一个Remote java Application
 
+# java 编译低版本 class
+`/jdk1.8/bin/javac -source 1.7 -target 1.7 T.java` 
+虽然使用高版本的JDK可以通过指定编译source和target参数来兼容低版本JDK，但只是class文件格式上的，如果引用了高版本JRE库中某些方法一样会再低版本的JDK上报错；典型的例子就是java.util.concurrent.ConcurrentHashMap.keySet()这个方法！  
+解决的办法是，编译使用对应的JDK，确保JRE的类库是对应版本。否则在意想不到的地方出现坑！  参考：http://stackoverflow.com/a/25705596
+
 ## classpath 中包含 jar 包
 windows 用;分隔， linux 用 : 分隔
 

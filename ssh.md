@@ -48,7 +48,7 @@ ssh-add
 debug1: Next authentication method: publickey
 
 原来是因为尝试了个没有意义而且会失败的 gssapi-with-mic 认证方式浪费了时间，
-打开(远程服务器) /etc/ssh/ssh_config 把里面的 GSSAPIAuthentication yes 改成 no 关掉它。
+打开(本机/远程服务器) /etc/ssh/ssh_config 把里面的 GSSAPIAuthentication yes 改成 no 关掉它。
 
 第二种情况:
 打开/etc/ssh/sshd_config ,查找 UseDNS yes, 改成no ,没有就添加一行
@@ -67,6 +67,7 @@ UseDNS no
 ## ssh proxy
 
     ssh -qTfnN -D 7070  sshproxy@106.185.27.168
+    ssh -qTfnN -D 7070  root@47.244.250.152
 
 ## putty  tunnel设置
 
@@ -75,6 +76,7 @@ UseDNS no
 plink    proxy.bat
 
 	PLINK.EXE -C -N -D 127.0.0.1:7070 sshproxy@106.185.27.168
+    PLINK.EXE -C -N -D 127.0.0.1:7070 root@47.244.250.152
 
 
 

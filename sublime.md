@@ -33,7 +33,16 @@ remove package
 		"open_files_in_new_window": false,
 		"remember_open_files": true,
 		"hot_exit":true,
-		"remember_full_screen": true
+		"remember_full_screen": true,
+
+        "tab_size": 4,
+        "translate_tabs_to_spaces": true,
+        "draw_white_space": "all",
+
+        // Display file encoding in the status bar
+        "show_encoding": true,
+        // Display line endings in the status bar
+        "show_line_endings": true,
 	｝
 ## 快捷键
 

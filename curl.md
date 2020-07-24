@@ -1,6 +1,10 @@
   vim: ft=markdown
 # Using curl to automate HTTP jobs
 
+# faq
+## 下载https链接
+ curl -O -L  https://github.com/....zip
+
 # 1. HTTP Scripting
 ## 1.1 Background
 ## 1.2 The HTTP Protocol

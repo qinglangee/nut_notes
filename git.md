@@ -43,6 +43,7 @@
     git remote add [-t <branch>] [-m <master>] [-f] [--[no-]tags] [--mirror=<fetch|push>] <name> <url>
     git remote rename <old> <new>
     git remote remove <name>
+    git remote -v    // 查看远程分支地址
 常用配置
 
     git config --global user.name "zhch"
@@ -129,6 +130,16 @@ bin
     git branch aa  # 新建分支 aa
     git branch -d aa  ## 删除分支 aa
     git branch -D aa  # 强制删除分支 aa, 没有merge也删除
+
+    # 创建分支 ab 并切换到 ab 分支
+    git branch ab
+    git checkout ab 
+    # 可以用一句代替上面两行
+    git checkout -b ab
+
+合并分支
+
+    git merge ab  # 把 ab 分支内容合并到当前分支来
 查看远程分支
 
     git branch -a

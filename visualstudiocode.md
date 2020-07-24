@@ -29,3 +29,9 @@ File->Preferences->Keyoard Shortcuts
 	{ "key": "alt+h",           "command": "workbench.action.previousEditor" },
 	{ "key": "alt+l",         "command": "workbench.action.nextEditor" }
 	]
+
+
+## 设置选项
+settings.json 不知道在哪里编辑了， File->Preferences->settings, 搜索对应选项，然后改吧
+// 设置自动检测文件编码
+"files.autoGuessEncoding":true

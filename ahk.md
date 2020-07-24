@@ -25,7 +25,7 @@ ahk 所有的变量都是字符串， 但纯数字的在进行数学计算时会
 需要转义的字符 # / ^ / { / } / + / !, 共6个， 转义用大括号包围 
 
 ### 生成exe
-Ahk2Exe.ext
+Ahk2Exe.exe
 
 在安装目录下  `d:\Program Files\AutoHotkey\Compiler\Ahk2Exe.exe`
 ### 表达式
