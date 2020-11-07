@@ -1,6 +1,8 @@
 # python 常用知识  
 ## 工具
-*pip* 包管理器
+*pip* 包管理器  
+`pip install --upgrade pip` 更新包管理器
+`pip show selenium` 查看包 selenium 版本等各种信息
 ## 信息查看
 查看是32位还是64位python  命令行运行python, 在开始的输出信息中会显示 32 位还是 64 位。 
 

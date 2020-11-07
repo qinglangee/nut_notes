@@ -15,6 +15,8 @@ windows 用;分隔， linux 用 : 分隔
 
 	# windows
 	java -cp "target/classes;target/dependency/activation-1.1.jar;target/dependency/antlr-2.7.7.jar" com.ison.server.DownloadParseMain 
+    # javac 也一样
+    javac -cp lib/aa.jar ...
 	# linux 分隔符不同
 	java -cp "target/classes:target/dependency/activation-1.1.jar:target/dependency/antlr-2.7.7.jar" com.ison.server.DownloadParseMain 
 

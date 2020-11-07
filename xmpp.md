@@ -1,3 +1,6 @@
+# XMPP 相关内容
+XMPP是一种基于标准通用标记语言的子集XML的协议，它继承了在XML环境中灵活的发展性。
+
 tigase官网：http://www.tigase.org/
 xmpp相关网站:http://wiki.jabbercn.org/RFC3920
 http://xmpp.org/xmpp-protocols/rfcs/

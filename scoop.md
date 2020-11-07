@@ -8,7 +8,9 @@
 # 先设置 PowerShell 允许执行未签名脚本
 set-executionpolicy remotesigned -s currentuser
 # 下载 Scoop 安装脚本进行安装
-iex (new-object net.webclient).downloadstring('https://get.scoop.sh')
+iex (new-object net.webclient).downloadstring('https://get.scoop.sh')  
+
+可能需要翻墙才能装上。  shadowsshockd 开全局模式就可以了。
 ```
 
 ## 安装软件

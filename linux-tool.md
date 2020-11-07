@@ -99,7 +99,10 @@ call: rename from to files...
 dataDir=/home/lifeix/temp/appdata/zookeeper
 ZOO_LOG_DIR=$(grep "^[[:space:]]*dataDir" "$ZOOCFG" | sed -e 's/.*=//')`
 ```
+带颜色查看 `grep -R --color aaabbb  ./src`
 查看特定类型的文件 `grep -R --include="*.cpp" aaabbb  ./src`
+忽略特定类型的文件 `grep -R --exclude="*.cpp" aaabbb  ./src`
+忽略特定类型的目录 `grep -R --exclude-dir="*history/" aaabbb  ./src`
 同样的功能, 用find的exec参数 `find -name '*.xml' -exec grep b  {} \; -print`
 输出两个文件的交集，差集，合集　
 ```

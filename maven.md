@@ -13,6 +13,9 @@ mvn dependency:copy-dependencies
     mvn compile war:inplace
 
 ## 安装到本地仓库
+在 maven 项目中安装，直接执行 `mvn install` 就可以了
+
+用 jar 文件安装   
 mvn install:install-file -DgroupId=com.lifeix -DartifactId=lifeix-l06 -Dversion=0.0.1  -Dpackaging=jar -Dfile=/home/lifeix/workspace/lifeix-automail/lib/lifeix_memcached_SNAPSHOT_20120319.jar
 mvn -o   参数o, offline模式, 不下载更新文件
 

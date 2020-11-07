@@ -76,6 +76,11 @@
     git config --global alias.ss="status -s"
     git config --global alias.l=log
 
+项目局部配置
+
+    git config  user.name "zhch"
+    git config  user.email "zhch@163.com"
+
 也可以直接编辑 .gitconfig 文件中直接添加， windows 下 在 `C:\Users\[user]` 中
 
     [user]
